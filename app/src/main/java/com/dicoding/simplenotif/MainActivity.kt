@@ -46,10 +46,6 @@ class MainActivity : AppCompatActivity() {
             sendNotification(title, message)
         }
 
-        // ini perubahan besar !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // ini perubahan lagi
-
-
         // untuk versi android diatas Tiramisu
         if (Build.VERSION.SDK_INT >= 33) {
             requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
