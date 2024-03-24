@@ -12,8 +12,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
-import com.dicoding.simplenotif.databinding.ActivityMainBinding
 import android.Manifest
+import android.app.PendingIntent
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
+import com.dicoding.simplenotif.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,13 +58,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendNotification(title: String, message: String) {
+        // untuk Action Intent
+        val openWebIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/MuhammadKurniawanDwiHariyadi/3.-Latihan-Notification-denganNotificationBuilder-NotificationManager"))
+        val openWebPendingIntent = PendingIntent.getActivity(this, 0, openWebIntent, PendingIntent.FLAG_IMMUTABLE)
+
+        // untuk Content Intent
+        val intent = Intent(this, MainActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle(title)
-            .setSmallIcon(R.drawable.ic_notification_active)
-            .setContentText(message)
-            .setPriority(Notification.PRIORITY_DEFAULT)
-            .setSubText(getString(R.string.notification_subtext))
+            .setContentTitle(title) // Judul dari notifikasi (wajib ada).
+            .setSmallIcon(R.drawable.ic_notification_active) // Ikon ini yang akan muncul pada status bar (wajib ada).
+            .setContentText(message) // Text yang akan muncul di bawah judul notifikasi (wajib ada).
+            .setPriority(Notification.PRIORITY_DEFAULT) // Untuk menentukan tingkat kepentingan dari notifiksai yang ditampilkan
+            .setSubText(getString(R.string.notification_subtext)) // Text ini yang akan muncul di bawah content text atau diatas sebelahan dengan nameApp
+            .setAutoCancel(true) // Digunakan untuk menghapus notifikasi setelah ditekan.
+            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.logo)) // untuk menambahkan logo pada kanan pesan
+            .addAction(R.drawable.ic_notification_active, "Open Web", openWebPendingIntent) // untuk menambahkan tombol dan meng intent
+            .setContentIntent(pendingIntent) // untuk menambahkan content/item jika pada notifikassi status bar di tekan
 
         // untuk versi android diatas Oreo
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -76,6 +93,10 @@ class MainActivity : AppCompatActivity() {
 
         val notification = builder.build()
         notificationManager.notify(NOTIFICATION_ID, notification)
+        /*
+        Kode di atas dengan code pada line 70 digunakan untuk mengirim notifikasi sesuai dengan id yang
+        kita berikan. Fungsi id di sini nanti juga bisa untuk membatalkan notifikasi yang sudah muncul.
+         */
     }
 
     companion object {
