@@ -103,5 +103,7 @@ sebelum aplikasi dapat mengirim notifikasi.
 <br>
   
 ## Dalam aplikasi ini terdapat fitur
+1. memminta permission notification
+2. menampilkan notification lengkap dengan judul, pesan, logo kecil, gambar besar di kanan pesan, ketika notification di tekan, menambahkan tombol dengan intent, text atas sebelah kanan dari nama aplikasi
 
 
