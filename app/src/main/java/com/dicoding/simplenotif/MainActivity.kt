@@ -47,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         // ini perubahan besar !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // ini perubahan lagi
+
 
         // untuk versi android diatas Tiramisu
         if (Build.VERSION.SDK_INT >= 33) {
